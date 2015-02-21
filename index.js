@@ -28,6 +28,8 @@ oldX = null;
 		}
 		if (Math.abs(data.x - oldX) > 0.05) {
 			console.log(data.x);
+            var c5 = new Audio('piano-c5.wav');
+            c5.play();
 			// var file = fs.createReadStream(dir + "/M1_Piano_C4");
 			oldX = data.x;
 			io.emit('audio', 'c');
