@@ -1,9 +1,25 @@
 {
   "name": "treehacks",
-  "version": "0.0.1",
-  "description": "myo music",
+  "version": "1.0.0",
+  "description": "Myo",
+  "main": "index.js",
   "dependencies": {
-    "express": "^4.10.6",
-    "socket.io": "^1.2.1"
-  }
+    "express": "^4.11.2",
+    "myo": "^1.3.0",
+    "socket.io": "^1.3.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rsikdar/treehacks.git"
+  },
+  "author": "Rohan Sikdar and Yitz Deng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rsikdar/treehacks/issues"
+  },
+  "homepage": "https://github.com/rsikdar/treehacks"
 }

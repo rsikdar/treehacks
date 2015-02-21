@@ -21,7 +21,7 @@ var io = require('socket.io')(http);
 startX = 0;
 oldX = null;
 
-// io.on('connection', function(socket){
+io.on('connection', function(socket){
 	myMyo.on('orientation', function(data) {
 		myMyo.unlock();
 		// console.log(data.x);
@@ -54,41 +54,41 @@ oldX = null;
 	});
 
 	myMyo.on('fingers_spread', function(edge){
-	    if (edge) {
+		if (edge) {
 			console.log('fingers spread start');
 			console.log(myMyo.lastIMU);
 			myMyo.vibrate();
-	    } else {
+		} else {
 			console.log('fingers spread end');
 		}
 	});
 
 	myMyo.on('fist', function(edge){
-	    if (edge) {
+		if (edge) {
 			console.log('fist start');
 			myMyo.zeroOrientation();
 			myMyo.vibrate();
-	    } else {
+		} else {
 			console.log('fist end');
 		}
 	});
 
 	myMyo.on('wave_in', function(edge){
-	    if (edge) {
+		if (edge) {
 			console.log('wave_in start');
 			myMyo.vibrate();
-	    } else {
+		} else {
 			console.log('wave_in end');
 		}
 	});
-// });
+});
 
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/index.html');
-	myMyo.zeroOrientation(); 
+	myMyo.zeroOrientation();
 });
 
 
-// http.listen(3000, function(){
-// 	console.log('listening on port 3000');
-// });
+http.listen(3000, function(){
+	console.log('listening on port 3000');
+});

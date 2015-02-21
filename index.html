@@ -6,10 +6,12 @@
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 		<script type="text/javascript">
-
 			var socket = io();
-			socket.on('audio', function(audio){
+			socket.on('audio', function(note){
+				var audio = new Audio('pianoAudio/' + note + '.wav');
 				audio.play();
+				console.log('playing ' + note);
+				}
 			})
 		</script>
 	</body>
