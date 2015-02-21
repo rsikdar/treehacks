@@ -2,16 +2,26 @@
 <html>
 	<body>
 		<p> "hello" </P>
-		<script src="bundle.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 		<script type="text/javascript">
+			var audio = null;
 			var socket = io();
 			socket.on('audio', function(note){
-				var audio = new Audio('http://104.36.83.116/myo/pianoAudio/' + note + '.wav');
+				audio = new Audio('http://104.36.83.116/myo/pianoAudio/' + note + '.wav');
 				audio.play();
 				console.log('playing ' + note);
-				})
+				});
+
+			socket.on('audio_end', function(){
+				if (audio != null) {
+					setTimeout(function(){ audio.pause(); }, 300);
+				}
+			});
+
+			socket.on('xPos', function(xVal){
+				//MOVE THE DOT
+			})
 		</script>
 	</body>
 </html>

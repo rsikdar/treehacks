@@ -27,7 +27,7 @@ io.on('connection', function(socket){
 		xVal = -data.x;
 		// console.log(data.x);
 		if (oldX === null) {
-			oldX = -xVal;
+			oldX = xVal;
 			myMyo.unlock();
 
 		}
@@ -37,62 +37,79 @@ io.on('connection', function(socket){
 			oldX = xVal;
 			// io.emit('audio', 'c');
 		}
-		if (((xVal) < 0.05) && ((xVal) >= 0)) {
-			io.emit('audio', 'c');
-		} else if (((xVal) < 0.1) && ((xVal) >= 0.05)) {
-			io.emit('audio', 'd');
-		} else if (((xVal) < 0.15) && ((xVal) >= 0.1)) {
-			io.emit('audio', 'e');
-		} else if (((xVal) < 0.2) && ((xVal) >= 0.15)) {
-			io.emit('audio', 'f');
-		} else if (((xVal) < 0.25) && ((xVal) >= 0.2)) {
-			io.emit('audio', 'g');
-		} else if (((xVal) < 0.3) && ((xVal) >= 0.25)) {
-			io.emit('audio', 'a');
-		} else if (((xVal) < 0.35) && ((xVal) >= 0.3)) {
-			io.emit('audio', 'b');
-		} else if (((xVal) < 0.4) && ((xVal) >= 0.35)) {
-			io.emit('audio', 'c');
-		}
+
+		io.emit('xPos', xVal);
 
 
-		if (data.y < -0.5) {
-			console.log('y smaller than -1');
-		}
-		if (data.z < -1) {
-			console.log('z smaller than -1');
-		}
+			// if (((xVal) < 0.05) && ((xVal) >= 0)) {
+			// 	io.emit('audio', 'c');
+			// } else if (((xVal) < 0.1) && ((xVal) >= 0.05)) {
+			// 	io.emit('audio', 'd');
+			// } else if (((xVal) < 0.15) && ((xVal) >= 0.1)) {
+			// 	io.emit('audio', 'e');
+			// } else if (((xVal) < 0.2) && ((xVal) >= 0.15)) {
+			// 	io.emit('audio', 'f');
+			// } else if (((xVal) < 0.25) && ((xVal) >= 0.2)) {
+			// 	io.emit('audio', 'g');
+			// } else if (((xVal) < 0.3) && ((xVal) >= 0.25)) {
+			// 	io.emit('audio', 'a');
+			// } else if (((xVal) < 0.35) && ((xVal) >= 0.3)) {
+			// 	io.emit('audio', 'b');
+			// } else if (((xVal) < 0.4) && ((xVal) >= 0.35)) {
+			// 	io.emit('audio', 'c');
+			// } 
+		//negative values
+		// else if (((xVal) < 0.3) && ((xVal) >= 0.25)) {
+		// 	io.emit('audio', 'a');
+		// } else if (((xVal) < 0.35) && ((xVal) >= 0.3)) {
+		// 	io.emit('audio', 'b');
+		// } else if (((xVal) < 0.4) && ((xVal) >= 0.35)) {
+		// 	io.emit('audio', 'c');
+		// }
 
 	});
 
 	myMyo.on('fingers_spread', function(edge){
+		// if (edge) {
+		// 	console.log('fingers spread start');
+		// 	console.log(myMyo.lastIMU);
+		// 	myMyo.vibrate();
+		// } else {
+		// 	console.log('fingers spread end');
+		// }
 		if (edge) {
-			console.log('fingers spread start');
-			console.log(myMyo.lastIMU);
+			console.log('orienting');
+			myMyo.zeroOrientation();
 			myMyo.vibrate();
 		} else {
-			console.log('fingers spread end');
+			console.log('orienting');
 		}
 	});
 
 	myMyo.on('fist', function(edge){
 		if (edge) {
-			console.log('fist start');
-			myMyo.zeroOrientation();
-			myMyo.vibrate();
+			if (((xVal) < 0.05) && ((xVal) >= 0)) {
+				io.emit('audio', 'c');
+			} else if (((xVal) < 0.1) && ((xVal) >= 0.05)) {
+				io.emit('audio', 'd');
+			} else if (((xVal) < 0.15) && ((xVal) >= 0.1)) {
+				io.emit('audio', 'e');
+			} else if (((xVal) < 0.2) && ((xVal) >= 0.15)) {
+				io.emit('audio', 'f');
+			} else if (((xVal) < 0.25) && ((xVal) >= 0.2)) {
+				io.emit('audio', 'g');
+			} else if (((xVal) < 0.3) && ((xVal) >= 0.25)) {
+				io.emit('audio', 'a');
+			} else if (((xVal) < 0.35) && ((xVal) >= 0.3)) {
+				io.emit('audio', 'b');
+			} else if (((xVal) < 0.4) && ((xVal) >= 0.35)) {
+				io.emit('audio', 'c');
+			}
 		} else {
-			console.log('fist end');
+			io.emit('audio_end');
 		}
 	});
 
-	myMyo.on('wave_in', function(edge){
-		if (edge) {
-			console.log('wave_in start');
-			myMyo.vibrate();
-		} else {
-			console.log('wave_in end');
-		}
-	});
 });
 
 app.get('/', function(req, res) {
