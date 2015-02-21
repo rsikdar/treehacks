@@ -20,11 +20,15 @@ var io = require('socket.io')(http);
 // var dir = "/piano_mp3";
 startX = 0;
 oldX = null;
+
 // io.on('connection', function(socket){
 	myMyo.on('orientation', function(data) {
+		myMyo.unlock();
 		// console.log(data.x);
 		if (oldX === null) {
 			oldX = data.x;
+			myMyo.unlock();
+
 		}
 		if (Math.abs(data.x - oldX) > 0.05) {
 			console.log(data.x);
@@ -83,6 +87,7 @@ app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/index.html');
 	myMyo.zeroOrientation(); 
 });
+
 
 // http.listen(3000, function(){
 // 	console.log('listening on port 3000');
