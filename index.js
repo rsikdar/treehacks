@@ -34,14 +34,25 @@ io.on('connection', function(socket){
 			console.log(data.x);
 			// var file = fs.createReadStream(dir + "/M1_Piano_C4");
 			oldX = data.x;
+			// io.emit('audio', 'c');
+		}
+		if (((data.x - startX) < 0.5) && ((data.x - startX) >= 0)) {
+			io.emit('audio', 'c');
+		} else if (((data.x - startX) < 0.1) && ((data.x - startX) >= 0.5)) {
+			io.emit('audio', 'd');
+		} else if (((data.x - startX) < 0.15) && ((data.x - startX) >= 0.1)) {
+			io.emit('audio', 'e');
+		} else if (((data.x - startX) < 0.2) && ((data.x - startX) >= 0.15)) {
+			io.emit('audio', 'f');
+		} else if (((data.x - startX) < 0.25) && ((data.x - startX) >= 0.2)) {
+			io.emit('audio', 'g');
+		} else if (((data.x - startX) < 0.3) && ((data.x - startX) >= 0.25)) {
+			io.emit('audio', 'a');
+		} else if (((data.x - startX) < 0.35) && ((data.x - startX) >= 0.3)) {
+			io.emit('audio', 'b');
+		} else if (((data.x - startX) < 0.4) && ((data.x - startX) >= 0.35)) {
 			io.emit('audio', 'c');
 		}
-		// if (((data.x - startX) < 0.1) && ((data.x - startX) >= 0)) {
-		// 	PythonShell.run('sound.py', function(err) {
-		// 		if (err) throw err;
-		// 		console.log('finished');
-		// 	});
-		// }
 
 
 		if (data.y < -0.5) {
