@@ -1,0 +1,9 @@
+{
+  "name": "treehacks",
+  "version": "0.0.1",
+  "description": "myo music",
+  "dependencies": {
+    "express": "^4.10.6",
+    "socket.io": "^1.2.1"
+  }
+}
