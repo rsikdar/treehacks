@@ -27,7 +27,7 @@ io.on('connection', function(socket){
 		xVal = -data.x;
 		// console.log(data.x);
 		if (oldX === null) {
-			oldX = xVal;
+			oldX = -xVal;
 			myMyo.unlock();
 
 		}
