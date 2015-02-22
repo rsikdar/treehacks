@@ -50,7 +50,6 @@
 				audio = new Audio('http://104.36.83.116/myo/pianoAudio/' + note + '.wav');
 				audio.play();
 				console.log('playing ' + note);
-                // document.getElementById(note).style.opacity = '0.3';
 				});
 
 			socket.on('xPos', function(xVal){
