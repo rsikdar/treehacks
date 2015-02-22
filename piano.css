@@ -1,5 +1,6 @@
 
 
+
 .piano {
     position: absolute;
     top:30%;
@@ -19,9 +20,53 @@
 }
 
 .white {
-    opacity: 0.1;
     width: 4.28%;
     height: 40%;
+}
+
+#c3{
+    opacity: 0.1
+}
+#d3{
+    opacity: 0.1
+}
+#e3{
+    opacity: 0.1
+}
+#f3{
+    opacity: 0.1
+}
+#g3{
+    opacity: 0.1
+}
+#a3{
+    opacity: 0.1
+}
+#b3{
+    opacity: 0.1
+}
+#c4{
+    opacity: 0.1
+}
+#d4{
+    opacity: 0.1
+}
+#e4{
+    opacity: 0.1
+}
+#f4{
+    opacity: 0.1
+}
+
+#g4{
+    opacity: 0.1
+}
+
+#a4{
+    opacity: 0.1
+}
+#b4{
+    opacity: 0.1
 }
 
 .white:hover{
@@ -45,6 +90,5 @@
     position: absolute;
     top: 30%
 }
-
 
 
