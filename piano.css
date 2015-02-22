@@ -95,10 +95,6 @@
     opacity: 0.5
 }
 
-.white:hover{
-    opacity: 0.3;}
-
-
 .black{
     opacity: 0.5;
     background-color: white;
@@ -107,14 +103,18 @@
     z-index: 1;
 }
 
-.black:hover{
-    opacity: 0;    
-}
-
 
 .highlight {
     position: absolute;
     top: 30%
 }
+
+#dot {
+    position: absolute;
+    top: 65%;
+    visibility: hidden;
+    height: 10px;
+}
+
 
 
