@@ -1,5 +1,5 @@
 var Myo = require("myo");
-var myMyo = Myo.create();
+
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -31,6 +31,8 @@ var oldZ = null;
 
 
 io.on('connection', function(socket){
+	console.log("connected");
+	var myMyo = Myo.create();
 	myMyo.on('arm_unsynced', function(){
 		console.log('please reconnect');
 	});
@@ -42,7 +44,7 @@ io.on('connection', function(socket){
 			xVal = -xVal;
 		}
 
-		console.log(data.x);
+		// console.log(data.x);
 		if (oldX === null) {
 			oldX = xVal;
 
@@ -214,7 +216,7 @@ io.on('connection', function(socket){
 
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/index.html');
-	myMyo.zeroOrientation();
+	// myMyo.zeroOrientation();
 });
 
 
