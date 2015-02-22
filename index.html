@@ -85,8 +85,15 @@
 			socket.on('xPos', function(xVal){
             
 
-                    document.getElementById("dot").style.visibility="visible";
                     var percentage = xVal*600/7 + 20;
+                    if(percentage>20 && percentage< 80)
+                    {
+
+                    document.getElementById("dot").style.visibility="visible";
+                    }
+                    else
+                    {
+                    document.getElementById("dot").style.visibility="hidden";
                     document.getElementById("dot").style.left=percentage+"%";
                     
             
