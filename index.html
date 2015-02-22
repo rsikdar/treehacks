@@ -33,28 +33,11 @@
 	<div id = "a4" class="white highlight" style="left: 71.43%; background-color: red"></div>
     <div id = "bb4" class="black highlight" style="left: 74.60%"></div>
 	<div id = "b4" class="white highlight" style="left: 75.71%; background-color: orange"></div>
-    <img id="pianoobjecthing" src="http://104.36.83.116/myo/images/piano.png" />
-<script type="text/javascript">
-var imgObj = null;
-var animate ;
-function init(){
-   imgObj = document.getElementById('pianoobjecthing');
-   imgObj.style.position= 'relative'; 
-   imgObj.style.left = '0px'; 
-    imgObj.style.top = '100px';
-}
-function moveRight(){
-   imgObj.style.left = parseInt(imgObj.style.left) + 10 + 'px';
-   animate = setTimeout(moveRight,20); // call moveRight in 20msec
-}
-function stop(){
-   clearTimeout(animate);
-   imgObj.style.left = '0px'; 
-}
-window.onload =init;
-</script>
-<input type="button" value="Start" onclick="moveRight();" />
+    <img id="dot" src="http://104.36.83.116/myo/images/dot.png" />
+
+
     	<script src="/socket.io/socket.io.js"></script>
+
 		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 		<script type="text/javascript">
 			var audio = null;
@@ -66,12 +49,19 @@ window.onload =init;
 				audio = new Audio('http://104.36.83.116/myo/pianoAudio/' + note + '.wav');
 				audio.play();
 				console.log('playing ' + note);
+                document.getElementById(note).style.opacity: 0.3;
 				});
 
 			socket.on('xPos', function(xVal){
+            
 
-				//MOVE THE DOT
+                    document.getElementById("dot").style.visibility="visible";
+                    var percentage = xVal*600/7 + 20;
+                    document.getElementById("dot").style.left=percentage+"%";
+                    
+            
 			})
+
 		</script>
 	</body>
 </html>

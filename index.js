@@ -48,12 +48,12 @@ io.on('connection', function(socket){
 		// 	myMyo.unlock();
 		// }
 
-		if (Math.abs(xVal - oldX) > 0.05) {
+	//	if (Math.abs(xVal - oldX) > 0.05) {
 			// console.log(xVal);
 			// var file = fs.createReadStream(dir + "/M1_Piano_C4");
 			oldX = xVal;
 			// io.emit('audio', 'c');
-		}
+	//	}
 
 		// if (Math.abs(zVal - oldZ) > 0.05) {
 		// 	// console.log(xVal);
@@ -63,62 +63,39 @@ io.on('connection', function(socket){
 		// }
 
 		io.emit('xPos', xVal);
-
 		// xVal = Math.abs(xVal);
 		if (rest_pose){
-			if (!play_flat) {
 				if (((xVal) < 0.05) && ((xVal) >= 0) && note_play != 'c3') {
 					note_play = 'c3';
-					io.emit('audio', 'c3');
+				//	io.emit('audio', 'c3');
 				} else if (((xVal) < 0.1) && ((xVal) >= 0.05) && note_play != 'd3') {
 					note_play = 'd3';
-					io.emit('audio', 'd3');
+				//	io.emit('audio', 'd3');
 				} else if (((xVal) < 0.15) && ((xVal) >= 0.1) && note_play != 'e3') {
 					note_play = 'e3';
-					io.emit('audio', 'e3');
+				//	io.emit('audio', 'e3');
 				} else if (((xVal) < 0.2) && ((xVal) >= 0.15) && note_play != 'f3') {
 					note_play = 'f3';
-					io.emit('audio', 'f3');
+				//	io.emit('audio', 'f3');
 				} else if (((xVal) < 0.25) && ((xVal) >= 0.2) && note_play != 'g3') {
 					note_play = 'g3';
-					io.emit('audio', 'g3');
+				//	io.emit('audio', 'g3');
 				} else if (((xVal) < 0.3) && ((xVal) >= 0.25) && note_play != 'a3') {
 					note_play = 'a3';
-					io.emit('audio', 'a3');
+				//	io.emit('audio', 'a3');
 				} else if (((xVal) < 0.35) && ((xVal) >= 0.3) && note_play != 'b3') {
 					note_play = 'b3';
-					io.emit('audio', 'b3');
+				//	io.emit('audio', 'b3');
 				} else if (((xVal) < 0.4) && ((xVal) >= 0.35) && note_play != 'c4') {
 					note_play = 'c4';
-					io.emit('audio', 'c4');
+				//	io.emit('audio', 'c4');
 				}
-			} else {
-				if (((xVal) < 0.05) && ((xVal) >= 0) && note_play != 'cb3') {
-					note_play = 'cb3';
-					io.emit('audio', 'cb3');
-				} else if (((xVal) < 0.1) && ((xVal) >= 0.05) && note_play != 'db3') {
-					note_play = 'db3';
-					io.emit('audio', 'db3');
-				} else if (((xVal) < 0.15) && ((xVal) >= 0.1) && note_play != 'eb3') {
-					note_play = 'eb3';
-					io.emit('audio', 'eb3');
-				} else if (((xVal) < 0.2) && ((xVal) >= 0.15) && note_play != 'fb3') {
-					note_play = 'fb3';
-					io.emit('audio', 'fb3');
-				} else if (((xVal) < 0.25) && ((xVal) >= 0.2) && note_play != 'gb3') {
-					note_play = 'gb3';
-					io.emit('audio', 'gb3');
-				} else if (((xVal) < 0.3) && ((xVal) >= 0.25) && note_play != 'ab3') {
-					note_play = 'ab3';
-					io.emit('audio', 'ab3');
-				} else if (((xVal) < 0.35) && ((xVal) >= 0.3) && note_play != 'bb3') {
-					note_play = 'bb3';
-					io.emit('audio', 'bb3');
-				} else if (((xVal) < 0.4) && ((xVal) >= 0.35) && note_play != 'cb4') {
-					note_play = 'cb4';
-					io.emit('audio', 'cb4');
-			}}
-			
+
+            if(play_flat)
+            {
+                note_play = note_play.charAt(0).concat("b", note_play.charAt(1));
+            }
+            io.emit('audio', note_play)   			
 		}
 
 		// if (rest_pose){
