@@ -163,9 +163,9 @@ io.on('connection', function(socket){
 
 		console.log('fingers spread');
 		// }
-		if (edge) {//if hold for 4 second, re-orient
+		if (edge) {//if hold for 2.5 second, re-orient
 			rest_pose = false;
-			myMyo.timer(edge, 4000, function(){
+			myMyo.timer(edge, 2500, function(){
 				console.log('orienting');
 				myMyo.zeroOrientation();
 			});
