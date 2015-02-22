@@ -128,7 +128,6 @@ io.on('connection', function(socket){
 		if (edge) {
 			rest_pose = false;
 			fist_pose = true;
-			io.emit('audio_end');
 		} else {
 			rest_pose = true;
 			fist_pose = false;

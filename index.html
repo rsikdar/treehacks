@@ -24,14 +24,8 @@
 				console.log('playing ' + note);
 				});
 
-			socket.on('audio_end', function(){
-				if (audio != null) {
-					setTimeout(function(){ audio.pause(); }, 3000);
-				}
-			});
-
 			socket.on('xPos', function(xVal){
-				
+
 				//MOVE THE DOT
 			})
 		</script>
