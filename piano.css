@@ -1,10 +1,11 @@
 
+
 .piano {
     position: absolute;
     top:30%;
-    left:20%;
+    left:25%;
     max-height:500px;
-    width: auto;
+    width: 50%;
     margin:auto;
 }
 
@@ -17,16 +18,26 @@
     background-color: transparent;
 }
 
+.white {
+    opacity: 0.1;
+    width: 4.28%;
+    height: 40%;
+}
+
+
+
+.black{
+    opacity: 0.5;
+    background-color: white;
+    height: 23%;
+    width: 2.30%;
+    z-index: 1;
+}
+
 
 .highlight {
-    top: 30%;
-    left: 20%;
     position: absolute;
-    background-color: green;
-    height: 125px;
-    width: 10%;
-    max-height: 200px;
-    opacity: 0;
+    top: 30%
 }
 
 .highlight:hover{
