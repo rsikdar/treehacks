@@ -1,39 +1,69 @@
 
 <!doctype html>
-
 <html>
     <head>
     <link rel="stylesheet" href="http://104.36.83.116/myo/piano.css">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,100italic,300italic' rel='stylesheet' type='text/css'>
+    <script src="jquery-2.1.3.js"></script>
     </head>
 	<body>
-    <img src="http://104.36.83.116/myo/images/piano.png" style="position: absolute; top: 30%; left: 20%; width: 60%;height: 40%;">
+    <script>
+        $(document).ready(function () {
+            $("#aboutButton").click(function (){
+                $('html, body').animate({
+                        scrollTop:$("#about").offset().top
+                    }, 1000);
+                });
+
+            $("#backToTop").click(function(){
+                $('html, body').animate({
+                    scrollTop:$("#pageTop").offset().top
+                    }, 1000);
+                });
+
+            });
+        </script>
+    <div id="header">
+        
+        <a  id="backToTop">Main</a>
+        <div id="title"><center>Myiano</center></div>
+
+
+        <a  id="aboutButton"> About Us</a>
+    </div>
+    <div id="pageTop"> </div>
+    <div id="pianokeysandstuffz">
+
+
+    <img src="http://104.36.83.116/myo/images/piano.png" style="position: absolute; top: 30%; left: 20%; width: 60%;height: 60%;">
+
     <div class="highlight" style="position: absolute; top: 30%; left: 20%;"></div>
-
-    <div id = "c3" class="white highlight" style="left: 20%; background-color: yellow"></div>
+    <div class="keyboardborder" id="leftborder"> </div>
+    <div class="keyboardborder" id="rightborder"> </div>
+    <div id = "c3" class="white highlight" style="left: 20%;"></div>
     <div id = "db3" class="black highlight" style="left: 23.21%"></div>
-    <div id = "d3" class="white highlight" style="left: 24.28%; background-color: green"></div>
+    <div id = "d3" class="white highlight" style="left: 24.28%;"></div>
 	<div id = "eb3" class="black highlight" style="left: 27.50%"></div>
-	<div id = "e3" class="white highlight" style="left: 28.57%; background-color: blue"></div>
-	<div id = "f3" class="white highlight" style="left: 32.86%; background-color: indigo"></div>
+	<div id = "e3" class="white highlight" style="left: 28.57%;"></div>
+	<div id = "f3" class="white highlight" style="left: 32.86%;"></div>
     <div id = "gb3" class="black highlight" style="left: 36.07%"></div>
-    <div id = "g3" class="white highlight" style="left: 37.14%; background-color: violet"></div>
+    <div id = "g3" class="white highlight" style="left: 37.14%;"></div>
 	<div id = "ab3" class="black highlight" style="left: 40.36%"></div>
-	<div id = "a3" class="white highlight" style="left: 41.43%; background-color: red"></div>
+	<div id = "a3" class="white highlight" style="left: 41.43%;"></div>
     <div id = "bb3" class="black highlight" style="left: 44.64%"></div>
-	<div id = "b3" class="white highlight" style="left: 45.71%; background-color: orange"></div>
-    <div id = "c4" class="white highlight" style="left: 50%; background-color: yellow"></div>
+	<div id = "b3" class="white highlight" style="left: 45.71%;"></div>
+    <div id = "c4" class="white highlight" style="left: 50%"></div>
     <div id = "db4" class="black highlight" style="left: 53.21%"></div>
-    <div id = "d4" class="white highlight" style="left: 54.28%; background-color: green"></div>
+    <div id = "d4" class="white highlight" style="left: 54.28%;"></div>
 	<div id = "eb4" class="black highlight" style="left: 57.50%"></div>
-	<div id = "e4" class="white highlight" style="left: 58.57%; background-color: blue"></div>
-	<div id = "f4" class="white highlight" style="left: 62.86%; background-color: indigo"></div>
+	<div id = "e4" class="white highlight" style="left: 58.57%;"></div>
+	<div id = "f4" class="white highlight" style="left: 62.86%;"></div>
     <div id = "gb4" class="black highlight" style="left: 66.00%"></div>
-    <div id = "g4" class="white highlight" style="left: 67.14%; background-color: violet"></div>
+    <div id = "g4" class="white highlight" style="left: 67.14%;"></div>
 	<div id = "ab4" class="black highlight" style="left: 70.32%"></div>
-	<div id = "a4" class="white highlight" style="left: 71.43%; background-color: red"></div>
+	<div id = "a4" class="white highlight" style="left: 71.43%;"></div>
     <div id = "bb4" class="black highlight" style="left: 74.60%"></div>
-	<div id = "b4" class="white highlight" style="left: 75.71%; background-color: orange"></div>
-
+	<div id = "b4" class="white highlight" style="left: 75.71%;"></div>
     <img id="dot" src="http://104.36.83.116/myo/images/dot.png" />
 
 
@@ -55,14 +85,31 @@
 			socket.on('xPos', function(xVal){
             
 
-                document.getElementById("dot").style.visibility="visible";
-                var percentage = xVal*600/7 + 20;
-                document.getElementById("dot").style.left=percentage+"%";
-                
+                    document.getElementById("dot").style.visibility="visible";
+                    var percentage = xVal*600/7 + 20;
+                    document.getElementById("dot").style.left=percentage+"%";
+                    
             
-			});
+			})
 
 		</script>
+
+        </div>
+        <div id="placeholder"> </div>
+
+        <div id="about">
+
+            <center>About Us</center>
+        <p> This website was created to work with a Myo armband. Moving up or down would change the note played, and making a fist would add a flat accidental. Holding a hand spread out for four seconds resets the current position, and rolling a hand either left or right allows the user to change his or her position on the piano before playing another note.  </p>
+        <p> Yitz Deng and Rohan Sikdar, the creators of this site, are freshmen at University of California, Berkeley. Rohan studies Computer Science and Music, and Yitz studies Computer Science, Applied Mathematics, and Statistics.  </p>
+
+        </div>
+
+
+
+
+
+
 	</body>
 </html>
 
