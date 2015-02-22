@@ -87,7 +87,7 @@ body {
     top: 30%;
     width: 20%;
     height: 60%;
-    z-index: 2;
+    z-index: 4;
 
 }
 
@@ -147,6 +147,7 @@ body {
     top: 65%;
     visibility: hidden;
     height: 10px;
+    z-index: 2;
 }
 
 
