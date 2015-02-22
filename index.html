@@ -16,6 +16,9 @@
 			var audio = null;
 			var socket = io();
 			socket.on('audio', function(note){
+				if (audio != null) {
+					audio.pause();
+				}
 				audio = new Audio('http://104.36.83.116/myo/pianoAudio/' + note + '.wav');
 				audio.play();
 				console.log('playing ' + note);
@@ -23,11 +26,12 @@
 
 			socket.on('audio_end', function(){
 				if (audio != null) {
-					setTimeout(function(){ audio.pause(); }, 300);
+					setTimeout(function(){ audio.pause(); }, 3000);
 				}
 			});
 
 			socket.on('xPos', function(xVal){
+				
 				//MOVE THE DOT
 			})
 		</script>
