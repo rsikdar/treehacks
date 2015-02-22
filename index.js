@@ -24,21 +24,30 @@ var fist_pose = false;
 var rest_pose = true;
 var note_play = null;
 var play_flat = false;
+var flip_sign = false;
 
 var startZ = 0;
 var oldZ = null;
 
 
 io.on('connection', function(socket){
+	myMyo.on('arm_unsynced', function(){
+		console.log('please reconnect');
+	});
 	myMyo.on('orientation', function(data) {
-		// console.	log(data.x);
+
 		myMyo.unlock();
 		xVal = -data.x;
+		if (flip_sign){
+			xVal = -xVal;
+		}
+
+		console.log(data.x);
 		if (oldX === null) {
 			oldX = xVal;
 
 		}
-		if (data.z < -0.15){
+		if (data.w < -0.05){
 			play_flat = true;
 		} else {
 			play_flat = false;
@@ -48,12 +57,12 @@ io.on('connection', function(socket){
 		// 	myMyo.unlock();
 		// }
 
-		if (Math.abs(xVal - oldX) > 0.05) {
-			// console.log(xVal);
-			// var file = fs.createReadStream(dir + "/M1_Piano_C4");
-			oldX = xVal;
-			// io.emit('audio', 'c');
-		}
+		// if (Math.abs(xVal - oldX) > 0.05) {
+		// 	// console.log(xVal);
+		// 	// var file = fs.createReadStream(dir + "/M1_Piano_C4");
+		// 	oldX = xVal;
+		// 	// io.emit('audio', 'c');
+		// }
 
 		// if (Math.abs(zVal - oldZ) > 0.05) {
 		// 	// console.log(xVal);
@@ -65,8 +74,8 @@ io.on('connection', function(socket){
 		io.emit('xPos', xVal);
 
 		// xVal = Math.abs(xVal);
-		if (rest_pose){
-			if (!play_flat) {
+		if (rest_pose || fist_pose){
+			if (!fist_pose) {
 				if (((xVal) < 0.05) && ((xVal) >= 0) && note_play != 'c3') {
 					note_play = 'c3';
 					io.emit('audio', 'c3');
@@ -91,6 +100,18 @@ io.on('connection', function(socket){
 				} else if (((xVal) < 0.4) && ((xVal) >= 0.35) && note_play != 'c4') {
 					note_play = 'c4';
 					io.emit('audio', 'c4');
+				} else if (((xVal) < 0.45) && ((xVal) >= 0.40) && note_play != 'd4') {
+					note_play = 'd4';
+					io.emit('audio', 'd4');
+				} else if (((xVal) < 0.50) && ((xVal) >= 0.45) && note_play != 'e4') {
+					note_play = 'e4';
+					io.emit('audio', 'e4');
+				} else if (((xVal) < 0.55) && ((xVal) >= 0.50) && note_play != 'f4') {
+					note_play = 'f4';
+					io.emit('audio', 'f4');
+				} else if (((xVal) < 0.60) && ((xVal) >= 0.55) && note_play != 'g4') {
+					note_play = 'g4';
+					io.emit('audio', 'g4');
 				}
 			} else {
 				if (((xVal) < 0.05) && ((xVal) >= 0) && note_play != 'cb3') {
@@ -117,87 +138,46 @@ io.on('connection', function(socket){
 				} else if (((xVal) < 0.4) && ((xVal) >= 0.35) && note_play != 'cb4') {
 					note_play = 'cb4';
 					io.emit('audio', 'cb4');
-			}}
+				} else if (((xVal) < 0.45) && ((xVal) >= 0.40) && note_play != 'db4') {
+					note_play = 'db4';
+					io.emit('audio', 'db4');
+				} else if (((xVal) < 0.50) && ((xVal) >= 0.45) && note_play != 'eb4') {
+					note_play = 'eb4';
+					io.emit('audio', 'eb4');
+				} else if (((xVal) < 0.55) && ((xVal) >= 0.50) && note_play != 'fb4') {
+					note_play = 'fb4';
+					io.emit('audio', 'fb4');
+				} else if (((xVal) < 0.60) && ((xVal) >= 0.55) && note_play != 'gb4') {
+					note_play = 'gb4';
+					io.emit('audio', 'gb4');
+				}
+			}
 			
 		}
-
-		// if (rest_pose){
-		// 	if ((xVal < -0.5) && note_play != 'a') {
-		// 		note_play = 'a';
-		// 		io.emit('audio', 'a');
-		// 	} else if ((xVal < -0.45) && (xVal >= -0.5) && note_play != 'bb') {
-		// 		note_play = 'bb';
-		// 		io.emit('audio', 'bb');
-		// 	} else if ((xVal < -0.4) && (xVal >= -0.45) && note_play != 'b') {
-		// 		note_play = 'b';
-		// 		io.emit('audio', 'b');
-		// 	} else if ((xVal < -0.35) && (xVal >= -0.4) && note_play != 'c') {
-		// 		note_play = 'c';
-		// 		io.emit('audio', 'c');
-		// 	} else if ((xVal < -0.30) && (xVal >= -0.35) && note_play != 'db') {
-		// 		note_play = 'db';
-		// 		io.emit('audio', 'db');
-		// 	} else if ((xVal < -0.25) && (xVal >= -0.30) && note_play != 'd') {
-		// 		note_play = 'd';
-		// 		io.emit('audio', 'd');
-		// 	} else if ((xVal < -0.20) && (xVal >= -0.25) && note_play != 'eb') {
-		// 		note_play = 'eb';
-		// 		io.emit('audio', 'eb');
-		// 	} else if ((xVal < -0.15) && (xVal >= -0.20) && note_play != 'e') {
-		// 		note_play = 'e';
-		// 		io.emit('audio', 'e');
-		// 	} else if ((xVal < -0.1) && (xVal >= -0.15) && note_play != 'f') {
-		// 		note_play = 'f';
-		// 		io.emit('audio', 'f');
-		// 	} else if ((xVal < -0.05) && (xVal >= -0.1) && note_play != 'gb') {
-		// 		note_play = 'gb';
-		// 		io.emit('audio', 'gb');
-		// 	} else if ((xVal < 0.05) && (xVal >= 0) && note_play != 'g') {
-		// 		note_play = 'g';
-		// 		io.emit('audio', 'g');
-		// 	} else if ((xVal < 0.10) && (xVal >= 0.05) && note_play != 'ab') {
-		// 		note_play = 'ab';
-		// 		io.emit('audio', 'ab');
-		// 	} else if ((xVal < 0.15) && (xVal >= 0.10) && note_play != 'a') {
-		// 		note_play = 'a';
-		// 		io.emit('audio', 'a');
-		// 	}
-		// }
-			
-		//negative values
-		// else if (((xVal) < 0.3) && ((xVal) >= 0.25)) {
-		// 	io.emit('audio', 'a');
-		// } else if (((xVal) < 0.35) && ((xVal) >= 0.3)) {
-		// 	io.emit('audio', 'b');
-		// } else if (((xVal) < 0.4) && ((xVal) >= 0.35)) {
-		// 	io.emit('audio', 'c');
-		// }
 
 	});
 
 	myMyo.on('fingers_spread', function(edge){
-		// if (edge) {
-		// 	console.log('fingers spread start');
-		// 	console.log(myMyo.lastIMU);
-		// 	myMyo.vibrate();
-		// } else {
-		// 	console.log('fingers spread end');
+
+		console.log('fingers spread');
 		// }
-		if (edge) {
+		if (edge) {//if hold for 1 second, re-orient
 			rest_pose = false;
-			console.log('orienting');
-			myMyo.zeroOrientation();
+			myMyo.timer(edge, 1000, function(){
+				console.log('orienting');
+				myMyo.zeroOrientation();
+			});
 		} else {
 			rest_pose = true;
-			console.log('orienting');
 		}
 	});
 
 	myMyo.on('wave_out', function(edge){
+		console.log('wave_out');
 		if (edge) {
 			rest_pose = false;
-			first_pose = true;
-			console.log(myMyo.lastIMU);
+			fist_pose = false;
+			// console.log(myMyo.lastIMU);
 		} else {
 			rest_pose = true;
 			fist_pose = false;
@@ -205,16 +185,18 @@ io.on('connection', function(socket){
 	});
 
 	myMyo.on('wave_in', function(edge){
+		console.log('wave_in');
 		if (edge) {
 			rest_pose = false;
-			first_pose = true;
+			fist_pose = false;
 		} else {
 			rest_pose = true;
 			fist_pose = false;
 		}
 	});
 
-	myMyo.on('fist', function(edge){
+	myMyo.on('fist', function(edge){//makes the note you are playing flat
+		console.log('fist');
 		if (edge) {
 			rest_pose = false;
 			fist_pose = true;
