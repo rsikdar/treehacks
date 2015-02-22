@@ -31,28 +31,26 @@
 	<div class="black highlight" style="left: 70.32%"></div>
 	<div class="white highlight" style="left: 71.43%; background-color: red"></div>
     <div class="black highlight" style="left: 74.60%"></div>
-	<div class="white highlight" style="left: 75.71%; background-color: orange"></div>
-		<script src="/socket.io/socket.io.js"></script>
+	<div class="white highlight" style="left: 75.71%; background-color: orange"></div>
+    		<script src="/socket.io/socket.io.js"></script>
 		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 		<script type="text/javascript">
 			var audio = null;
 			var socket = io();
 			socket.on('audio', function(note){
+				if (audio != null) {
+					audio.pause();
+				}
 				audio = new Audio('http://104.36.83.116/myo/pianoAudio/' + note + '.wav');
 				audio.play();
 				console.log('playing ' + note);
 				});
 
-			socket.on('audio_end', function(){
-				if (audio != null) {
-					setTimeout(function(){ audio.pause(); }, 300);
-				}
-			});
-
 			socket.on('xPos', function(xVal){
+
 				//MOVE THE DOT
 			})
 		</script>
 	</body>
 </html>
-	
+
