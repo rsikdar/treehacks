@@ -161,9 +161,9 @@ io.on('connection', function(socket){
 
 		console.log('fingers spread');
 		// }
-		if (edge) {//if hold for 1 second, re-orient
+		if (edge) {//if hold for 4 second, re-orient
 			rest_pose = false;
-			myMyo.timer(edge, 1000, function(){
+			myMyo.timer(edge, 4000, function(){
 				console.log('orienting');
 				myMyo.zeroOrientation();
 			});
@@ -175,6 +175,7 @@ io.on('connection', function(socket){
 	myMyo.on('wave_out', function(edge){
 		console.log('wave_out');
 		if (edge) {
+			note_play = null;
 			rest_pose = false;
 			fist_pose = false;
 			// console.log(myMyo.lastIMU);
@@ -187,6 +188,7 @@ io.on('connection', function(socket){
 	myMyo.on('wave_in', function(edge){
 		console.log('wave_in');
 		if (edge) {
+			note_play = null;
 			rest_pose = false;
 			fist_pose = false;
 		} else {
