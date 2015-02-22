@@ -24,14 +24,16 @@ var fist_pose = false;
 var rest_pose = true;
 var note_play = null;
 
+var startZ = 0;
+var oldZ = null;
+
 
 io.on('connection', function(socket){
 	myMyo.on('orientation', function(data) {
 		// console.	log(data.x);
 		myMyo.unlock();
 		xVal = data.x;
-		// console.log(data.w);
-		// console.log(data.x);
+		console.log(data.z);
 		if (oldX === null) {
 			oldX = xVal;
 			myMyo.unlock();
@@ -108,6 +110,7 @@ io.on('connection', function(socket){
 		if (edge) {
 			rest_pose = false;
 			first_pose = true;
+			console.log(myMyo.lastIMU);
 		} else {
 			rest_pose = true;
 			fist_pose = false;
