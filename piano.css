@@ -24,6 +24,8 @@
     height: 40%;
 }
 
+.white:hover{
+    opacity: 0.3;}
 
 
 .black{
@@ -34,14 +36,15 @@
     z-index: 1;
 }
 
+.black:hover{
+    opacity: 0;    
+}
+
 
 .highlight {
     position: absolute;
     top: 30%
 }
 
-.highlight:hover{
-    opacity: 0.3;
-}
 
 
