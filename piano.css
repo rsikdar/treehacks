@@ -114,17 +114,7 @@
 
 .highlight {
     position: absolute;
-    top: 30%;
+    top: 30%
 }
-
-#dot {
-    position: absolute;
-    
-    top: 65%;
-    visibility: hidden;
-    height: 5px;
-}
-
-
 
 
