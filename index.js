@@ -30,8 +30,15 @@ var oldZ = null;
 
 
 io.on('connection', function(socket){
+	console.log('myMyo ' + myMyo);
+	myMyo.on('pose',function(pose){
+		console.log(pose);
+	});
+	myMyo.on('arm_unsynced', function(){
+		console.log('please reconnect');
+	});
 	myMyo.on('orientation', function(data) {
-		// console.	log(data.x);
+		console.log(data.x);
 		myMyo.unlock();
 		xVal = -data.x;
 		if (oldX === null) {
@@ -95,11 +102,11 @@ io.on('connection', function(socket){
             {
                 note_play = note_play.charAt(0).concat("b", note_play.charAt(1));
             }
-            io.emit('audio', note_play)   			
+            io.emit('audio', note_play);
 		}
 
 		// if (rest_pose){
-		// 	if ((xVal < -0.5) && note_play != 'a') {
+		//	if ((xVal < -0.5) && note_play != 'a') {
 		// 		note_play = 'a';
 		// 		io.emit('audio', 'a');
 		// 	} else if ((xVal < -0.45) && (xVal >= -0.5) && note_play != 'bb') {
@@ -158,7 +165,7 @@ io.on('connection', function(socket){
 		// 	console.log(myMyo.lastIMU);
 		// 	myMyo.vibrate();
 		// } else {
-		// 	console.log('fingers spread end');
+		console.log('fingers spread');
 		// }
 		if (edge) {
 			rest_pose = false;
@@ -171,6 +178,7 @@ io.on('connection', function(socket){
 	});
 
 	myMyo.on('wave_out', function(edge){
+		console.log('wave_out');
 		if (edge) {
 			rest_pose = false;
 			first_pose = true;
@@ -182,6 +190,7 @@ io.on('connection', function(socket){
 	});
 
 	myMyo.on('wave_in', function(edge){
+		console.log('wave_in');
 		if (edge) {
 			rest_pose = false;
 			first_pose = true;
@@ -192,6 +201,8 @@ io.on('connection', function(socket){
 	});
 
 	myMyo.on('fist', function(edge){
+		console.log('fist');
+		myMyo.unlock();
 		if (edge) {
 			rest_pose = false;
 			fist_pose = true;
